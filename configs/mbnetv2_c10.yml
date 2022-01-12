@@ -1,0 +1,74 @@
+# No tabs in yaml file
+
+# Setup
+setup: robustness_evaluation
+random_seed: 1
+
+# model
+model:
+        name: mobilenetv2
+        n_cls: 10
+
+# Database
+train_db: CIFAR10 # CIFAR100/MNIST
+val_db: CIFAR10 # CIFAR100/MNIST
+trBatch: 32
+valBatch: 32
+nworkers: 32
+tr_val_split: 0.1
+
+# Robustness
+robustness:
+        name: CIFAR10-C
+        dataset: dataset/CIFAR-10-C # dataset path
+
+# Optimizer and scheduler
+epochs: 2
+#optimizer:
+#        name: adam
+#        lr: 0.001
+#        wd: 0.00001  # 1e-05
+
+#optimizer:
+#        name: rmsprop
+#        lr: 0.001
+#        alpha: 0.9
+#        momentum: 0.9
+#        wd: 0.00001
+
+optimizer:
+        name: sgd
+        lr: 0.01
+        wd: 0.00001
+        momentum: 0.9
+        nestrov: False
+
+# Learning rate scheduling
+scheduler:
+        name: StepLR
+        step_size: 50
+        gamma: 0.2
+
+# Loss kwargs
+loss_fun: cross_entropy_loss
+
+# Model
+
+# Tasks
+
+# printing
+print_rate_bt: 100
+
+# Validation
+val_rate: 1
+
+# model save path
+ckpt: 
+        path: "results_mv2_c10/trained_models/ckpt/"
+        name: "mv2_c10_model.pth"
+bestmodel:
+        path: "results_mv2_c10/trained_models/bestmodel/"
+        name: "mv2_c10_bestmodel.pth"
+
+# Plotting
+plotpath: "results_mv2_c10/"
